@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f3f3f3;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #222;
+}
+
+p {
+    font-size: 1.1em;
+    color: #444;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.btn {
+    display: inline-block;
+    margin: 15px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn-create {
+    background-color: #28a745;
+}
+
+.btn-create:hover {
+    background-color: #218838;
+}
+
+.btn-join {
+    background-color: #007bff;
+}
+
+.btn-join:hover {
+    background-color: #0069d9;
+}
