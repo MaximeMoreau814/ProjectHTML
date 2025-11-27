@@ -19,9 +19,16 @@ p {
 }
 
 
+.button-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px; 
+}
+
+
 .btn {
-    display: inline-block;
-    margin: 15px;
     padding: 12px 25px;
     font-size: 1.1em;
     border-radius: 8px;
@@ -29,22 +36,39 @@ p {
     text-decoration: none;
     color: white;
     transition: 0.2s;
+    width: 200px; 
+    display: block; 
+    text-align: center;
 }
 
-.btn-create {
-    background-color: #28a745;
+.btn-copy {
+    background-color: #808080;
+    font-size: 0.9em;     
+    padding: 6px 15px;
 }
 
-.btn-create:hover {
-    background-color: #218838;
+.btn-copy:hover {
+    background-color: #5E5C5C;
 }
 
-.btn-join {
-    background-color: #007bff;
+.btn-start {
+    background-color: #B33924;
+    font-size: 1.8em;     
+    padding: 25px 50px;
+    width: 350px;
 }
 
-.btn-join:hover {
-    background-color: #0069d9;
+.btn-start:hover {
+    background-color: #8A2E1D;
+}
+.btn-back {
+    background-color: rgb(4, 170, 60);
+    font-size: 0.95em;
+    padding: 10px 25px;
+}
+
+.btn-back:hover {
+    background-color: #027c08;
 }
 
 #code-box {

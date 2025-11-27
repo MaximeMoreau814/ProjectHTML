@@ -1,0 +1,61 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f3f3f3;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #222;
+}
+
+p {
+    font-size: 1.1em;
+    color: #444;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.button-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px; 
+}
+
+.btn {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+    width: 200px; 
+    display: block; 
+    text-align: center;
+}
+
+.btn-join {
+    background-color: #ff0000;
+    font-size: 1.8em;     
+    padding: 25px 50px;
+    width: 350px;
+}
+
+.btn-join:hover {
+    background-color: #b90000;
+}
+
+.btn-back {
+    background-color: rgb(4, 170, 60);
+    font-size: 0.95em;
+    padding: 10px 25px;
+}
+
+.btn-back:hover {
+    background-color: #027c08;
+}
