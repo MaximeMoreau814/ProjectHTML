@@ -19,7 +19,7 @@ const backBtn = document.getElementById("back-btn");
         backBtn.addEventListener("click", function() {
             window.location.href = "index.html";
         });
-        
+
 const copyBtn = document.getElementById("copy-btn");
 copyBtn.addEventListener("click", function() {
     navigator.clipboard.writeText(text).then(() => {
