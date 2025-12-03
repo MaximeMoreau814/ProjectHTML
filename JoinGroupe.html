@@ -14,9 +14,23 @@
     </p>
 
     <input type="text" id="code" class="zone-saisie" maxlength="5"/> 
+    
+    <script>
+        const input = document.getElementById('code');
+
+        input.addEventListener('input', function() {
+            // Remplace chaque caractère par sa version en majuscule
+            input.value = input.value.toUpperCase();
+        });
+    </script>
 
     <div class="button-container">
         <button id="join-btn" class="btn btn-join">Rejoindre le groupe</button>
         <a href="Index.html" id="back-btn" class="btn btn-back">Retour à l'accueil</a>
     </div>
 </body>
+<footer>
+        <p>&copy; 2024 Polytech Angers : Rémi Reulier / Maxime Moreau / Clément Gautret</p>
+</footer>
+<script src="scriptJoin.js"></script>
+</html>

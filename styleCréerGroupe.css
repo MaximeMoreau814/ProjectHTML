@@ -70,6 +70,15 @@ p {
 .btn-back:hover {
     background-color: #027c08;
 }
+.btn-valid {
+    background-color: rgb(4, 170, 60);
+    font-size: 0.95em;
+    padding: 10px 25px;
+}
+
+.btn-valid:hover {
+    background-color: #027c08;
+}
 
 #code-box {
     font-size: 2.5em;
@@ -81,5 +90,14 @@ p {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     letter-spacing: 8px;
+}
+
+input
+{
+  height: 60px;
+  width: 500px;
+  font-size: 3.5em;
+  text-align: center;
+  border-radius: 10px;
 }
 
