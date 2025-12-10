@@ -26,6 +26,12 @@ p {
     gap: 15px; 
 }
 
+.erreur {
+    display: none;
+    color: red;
+    font-size: 1.8em;
+}
+
 .btn {
     padding: 12px 25px;
     font-size: 1.1em;

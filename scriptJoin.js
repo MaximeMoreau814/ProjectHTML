@@ -1,29 +1,24 @@
 const input = document.getElementById('code');
+const button = document.getElementById("join-btn");
+let error = document.getElementById("erreur");
+let prevcode;
 
 input.addEventListener('input', function() {
     input.value = input.value.toUpperCase();
+    if(prevcode!=input.value){
+      error.style.display = "none";
+    }
 });
 
-const button = document.getElementById("join-btn");
+button.addEventListener("click", () => {
+    const texte = input.value;
+    prevcode = texte;
 
-let error = false;
-
-button.addEventListener("click", (event) => {
-    var texte = document.getElementById("code").value;
-    if(texte.length == 5){
+    if (texte.length === 5) {
+        error.style.display = "none";
         window.location.href = "NameUSer.html";
-    }
-    else{
-        error = true;
+
+    } else {
+        error.style.display = "block";
     }
 });
-
-let d2 = document.getElementById("erreur");
-
-function togg(){
-  if(error == true){
-    d2.style.display = "contents";
-  }else{
-    d2.style.display = "none";
-  }
-};
