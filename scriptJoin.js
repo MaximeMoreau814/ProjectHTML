@@ -1,7 +1,8 @@
 const input = document.getElementById('code');
 const button = document.getElementById("join-btn");
 let error = document.getElementById("erreur");
-let prevcode;
+let prevcode="";
+error.style.display = "none";
 
 input.addEventListener('input', function() {
     input.value = input.value.toUpperCase();
