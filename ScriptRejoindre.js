@@ -7,7 +7,7 @@ error.style.display = "none";
 input.addEventListener('input', function() {
     input.value = input.value.toUpperCase();
     if(prevcode!=input.value){
-      error.style.display = "none";
+        error.style.display = "none";
     }
 });
 
