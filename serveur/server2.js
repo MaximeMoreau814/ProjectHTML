@@ -9,11 +9,6 @@ let room_exist = false;
 
 let Rooms = {};
 
-
-data=fetch('./Rooms.json')
-.then(response => response.json())
-.then(data => Rooms=data);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,10 +24,6 @@ app.use(cors({
 app.get('/', function(req, res) {
     res.send('du texte');
 });*/
-
-app.get('/Rooms', function(req, res) {
-    res.json(Rooms);
-});
 
 app.get('/add_usr', function(req, res) {
     j=1
