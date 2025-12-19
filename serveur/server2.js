@@ -7,8 +7,12 @@ let create_room = true;
 let create_user = true;
 let room_exist = false;
 
-var config = {
-}
+let Rooms = {};
+
+
+data=fetch('./Rooms.json')
+.then(response => response.json())
+.then(data => Rooms=data);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,25 +30,25 @@ app.get('/', function(req, res) {
     res.send('du texte');
 });*/
 
-app.get('/config', function(req, res) {
-    res.json(config);
+app.get('/Rooms', function(req, res) {
+    res.json(Rooms);
 });
 
 app.get('/add_usr', function(req, res) {
     j=1
     create_user=true;
     if("r" in req.query && "user" in req.query) {
-        for(var key in config){
-            if(config[key].name==req.query.r){
-                for(var usr in config[key]){
+        for(var key in Rooms){
+            if(Rooms[key].name==req.query.r){
+                for(var usr in Rooms[key]){
                     j++;
-                    if(config[key][usr]==req.query.user){
+                    if(Rooms[key][usr]==req.query.user){
                         create_user=false;
                     }
                 }
                 j--;
                 if(create_user){
-                    config[key]["user"+j]=req.query.user;
+                    Rooms[key]["user"+j]=req.query.user;
                     res.send(true);
                 }
                 else{
@@ -60,8 +64,8 @@ app.get('/add_usr', function(req, res) {
 app.get('/join', function(req, res) {
     room_exist=false;
     if("r" in req.query) {
-        for(var key in config){
-            if(config[key].name==req.query.r){
+        for(var key in Rooms){
+            if(Rooms[key].name==req.query.r){
                 res.send(true);
                 room_exist=true;
             }
@@ -77,15 +81,15 @@ app.get('/join', function(req, res) {
 app.get('/create', function(req, res) {
     create_room=true;
     if("r" in req.query && "user" in req.query) {
-        for(var key in config){
-            if(config[key].name==req.query.r){
+        for(var key in Rooms){
+            if(Rooms[key].name==req.query.r){
                 create_room=false;
             }
         }
         if(create_room){
-            config["room"+i]={};
-            config["room"+i].name=req.query.r;
-            config["room"+i]["user1"]=req.query.user;
+            Rooms["room"+i]={};
+            Rooms["room"+i].name=req.query.r;
+            Rooms["room"+i]["user1"]=req.query.user;
             i++;
             res.send(true);
         }
@@ -100,7 +104,7 @@ app.get('/create', function(req, res) {
 //app.get('/delete', function())
 
 app.get('/json', function(req, res) {
-    res.json(config);
+    res.json(Rooms);
 });
 
 app.listen(8080); //commence à accepter les requêtes
