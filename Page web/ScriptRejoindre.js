@@ -17,7 +17,16 @@ button.addEventListener("click", () => {
 
     if (texte.length === 5) {
         error.style.display = "none";
-        window.location.href = "NameUSer.html";
+        let value;
+        value = fetch('http://localhost:8080/isroomvalid?room='+texte).then(response => response.text()).then(data => {
+            if(data == "true"){
+                localStorage.setItem('roomcode',texte);
+                window.location.href = "NameUSer.html";
+            }
+            else{
+                error.style.display = "block";
+            }
+        });
 
     } else {
         error.style.display = "block";

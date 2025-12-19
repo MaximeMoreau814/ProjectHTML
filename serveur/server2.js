@@ -92,6 +92,40 @@ app.get('/create', function(req, res) {
     }
 });
 
+app.get('/delete', function(req,res) {
+    let roomname;
+    let username;
+    if("r" in req.query && "user" in req.query) {
+        for(var key in Rooms){
+            if(Rooms[key].name==req.query.r){
+                roomname=key;
+                break;
+            }
+        }
+        for(var key in Rooms[roomname]){
+            if(Rooms[roomname][key]==req.query.user){
+                username=key;
+                break;
+            }
+        }
+        delete Rooms[roomname][username];
+        if(Object.keys(Rooms[roomname]).length==1){
+            delete Rooms[roomname];
+        }
+    }
+});
+
+app.get('/isroomvalid',function(req,res) {
+    if("room" in req.query){
+        for(var key in Rooms){
+            if(Rooms[key].name == req.query.room){
+                res.send(true);
+            }
+        }
+        res.send(false);
+    }
+});
+
 //app.get('/delete', function())
 
 app.get('/json', function(req, res) {

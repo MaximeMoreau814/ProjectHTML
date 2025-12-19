@@ -24,12 +24,20 @@ var Pseudo =document.getElementById("Pseudo").value;
         }
         else
         {
-            window.location.href = "Lobby.html";
+            localStorage.setItem('username',Pseudo);
+            fetch('http://localhost:8080/add_usr?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
+                if(data == "true"){
+                    window.location.href = "Lobby.html";
+                }
+                else{
+                    alert("Ce Pseudo est déjà utilisé dans cette room.")
+                }
+            });
+            
         }
     }
-
- 
 } 
+
 const ValidBtn = document.getElementById("btn-valid");
         ValidBtn.addEventListener("click", function() {
             verif_champ();
