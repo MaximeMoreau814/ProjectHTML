@@ -1,11 +1,14 @@
+if(localStorage.getItem('username')){
+    window.location.href = "Lobby.html";
+}
 
 function verif_champ() 
-{ 
-var Pseudo =document.getElementById("Pseudo").value;
-	if (Pseudo == "") 
-	{ 
-	alert("Veuillez entrer un pseudo."); 
-	} 
+{
+    var Pseudo =document.getElementById("Pseudo").value;
+    if (Pseudo == "") 
+    { 
+    alert("Veuillez entrer un pseudo."); 
+    } 
     else 
     { 
         var space=0;
@@ -25,14 +28,17 @@ var Pseudo =document.getElementById("Pseudo").value;
         else
         {
             localStorage.setItem('username',Pseudo);
-            fetch('http://localhost:8080/add_usr?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
-                if(data == "true"){
-                    window.location.href = "Lobby.html";
-                }
-                else{
-                    alert("Ce Pseudo est déjà utilisé dans cette room.")
-                }
-            });
+            if(localStorage.getItem('roomcode')){
+                fetch('http://localhost:8080/add_usr?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
+                    console.log(data)
+                    if(data == "true"){
+                    }
+                    else{
+                        alert("Ce Pseudo est déjà utilisé dans cette room.")
+                    }
+                });
+            }
+            window.location.href = "Lobby.html";
             
         }
     }

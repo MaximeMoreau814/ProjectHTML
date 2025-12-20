@@ -6,27 +6,24 @@ window.addEventListener('beforeunload', function (e) {
 });
 
 if(!localStorage.getItem('roomcode')){
+    let code="";
     function generateCode() {
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let code = "";
 
         for (let i = 0; i < 5; i++) {
             code += letters[Math.floor(Math.random()*26)];
         }
         //document.getElementById("code-box").textContent = code;
         fetch('http://localhost:8080/create?r='+code+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
-            if(data == "string"){
-                localStorage.setItem('roomcode',code);
-                return code;
-            }
-            else{
-                return generateCode();
+            if(data =! "true"){
+                generateCode();
             }
         });
     }
-    let text=localStorage.getItem('roomcode');
+    generateCode();
+    localStorage.setItem('roomcode',code);
+    let text=code;
     document.getElementById("code-box").textContent = text;
-    console.log(text);
 
     const backBtn = document.getElementById("back-btn");
             backBtn.addEventListener("click", function() {
