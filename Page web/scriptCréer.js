@@ -1,9 +1,14 @@
 window.addEventListener('beforeunload', function (e) {
-    e.preventDefault();
-    e.returnValue = '';
+    p=e.preventDefault();
     fetch('http://localhost:8080/delete?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username'));
     localStorage.clear();
+    console.log();
 });
+/*
+window.onunload = function(e) {
+    console.log("unload event");
+    alert("salut");
+}*/
 
 if(!localStorage.getItem('roomcode')){
     let code="";
