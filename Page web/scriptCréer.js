@@ -42,6 +42,10 @@ if(!localStorage.getItem('roomcode')){
             alert("Impossible de copier le code !");
         });
     });
+    const startBtn = document.getElementById("start-btn");
+        startBtn.addEventListener("click", function() {
+        window.location.href = "Game.html";
+    });
 }
 else{
     let text=localStorage.getItem('roomcode');
@@ -60,5 +64,9 @@ else{
         }).catch(() => {
             alert("Impossible de copier le code !");
         });
+    });
+    const startBtn = document.getElementById("start-btn");
+        startBtn.addEventListener("click", function() {
+        window.location.href = "Game.html";
     });
 }
