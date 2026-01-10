@@ -1,14 +1,10 @@
-window.addEventListener('beforeunload', function (e) {
-    p=e.preventDefault();
-    fetch('http://localhost:8080/delete?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username'));
+window.onbeforeunload = function(e) {
+    e.preventDefault();
+}
+
+window.addEventListener('unload', function (e) {
     localStorage.clear();
-    console.log();
 });
-/*
-window.onunload = function(e) {
-    console.log("unload event");
-    alert("salut");
-}*/
 
 if(!localStorage.getItem('roomcode')){
     let code="";
