@@ -7,15 +7,16 @@
     </head>
     <body>
 
-        <h1>Bienvenue dans votre room privée</h1>
+        <h1 id="bienvenue">Bienvenue dans votre room privée</h1>
 
-        <p>
+        <p id="indication">
             Voici le code de votre Lobby.
             Partagez-le avec vos amis pour qu'ils puissent rejoindre cette room.
         </p>
 
         <div id="code-box">-----</div>
 
+        <div class="foot" hidden>(code : <p2 id="code">-----</p2>)</div>
         <div class="button-container">
             <button id="copy-btn" class="btn btn-copy">Copier/Partager le code</button>
             <button id="start-btn" class="btn btn-start">Lancer la partie</button>
