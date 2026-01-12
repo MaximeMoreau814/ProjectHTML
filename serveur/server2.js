@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express'); //import de la bibliothèque Express
 var app = express(); //instanciation d'une application Express
 
@@ -126,10 +127,27 @@ app.get('/isroomvalid',function(req,res) {
     }
 });
 
+app.get('/part',function(req,res) {
+    if("room" in req.query){
+        for(var key in Rooms){
+            if(Rooms[key].name == req.query.room){
+                res.send(Rooms[key])
+            }
+        }
+        res.send(false);
+    }
+})
+
 //app.get('/delete', function())
 
 app.get('/json', function(req, res) {
     res.json(Rooms);
+});
+
+app.get('/question', function(req, res) {
+    fs.readFile('./serveur/Question.txt', 'utf-8', (err,data) => {
+        res.send(data);
+    });
 });
 
 app.listen(8080); //commence à accepter les requêtes

@@ -19,11 +19,13 @@ p {
 }
 
 .foot {
+    margin-top: 30px;
+    visibility: hidden;
     font-size: 0.7em;
 }
 
 .button-container {
-    margin-top: 30px;
+    margin-top: 5px;
     display: flex;
     flex-direction: column; 
     align-items: center;

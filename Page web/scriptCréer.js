@@ -10,12 +10,13 @@ window.addEventListener('unload', function (e) {
 });
 
 const backBtn = document.getElementById("back-btn");
-    backBtn.addEventListener("click", function() {
+backBtn.addEventListener("click", function() {
     window.location.href = "Index.html";
 });
 
 const copyBtn = document.getElementById("copy-btn");
-    copyBtn.addEventListener("click", function() {
+copyBtn.addEventListener("click", function() {
+    text = document.getElementById("code-box").textContent;
     navigator.clipboard.writeText(text).then(() => {
         alert("Code copié : " + text);
     }).catch(() => {
@@ -28,6 +29,28 @@ const startBtn = document.getElementById("start-btn");
     localStorage.setItem("start","true");
     main();
 });
+
+function updateInfo(){
+    let roomCode = localStorage.getItem('roomcode');
+    fetch('http://localhost:8080/part?room=' + roomCode)
+    .then(response => response.json())
+    .then(roomData => {
+        if (roomData == false) return;
+        const listeuser = document.getElementById("users");
+        listeuser.innerHTML = "";
+        for (const key in roomData) {
+            if (key.startsWith("user")) {
+                let li = document.createElement("li");
+                li.textContent = roomData[key];
+                console.log(roomData[key]);
+                li.style.fontSize = "1.2em";
+                li.style.padding = "5px";
+                listeuser.appendChild(li);
+            }
+        }
+ 
+    });
+}
 
 function main(){
     if(!localStorage.getItem('start')){
@@ -48,8 +71,7 @@ function main(){
             }
             generateCode();
             localStorage.setItem('roomcode',code);
-            let text=code;
-            document.getElementById("code-box").textContent = text;
+            document.getElementById("code-box").textContent = code;
 
         }
         else{
@@ -59,27 +81,31 @@ function main(){
         }
     }
     else{
-        console.log("ture");
-        var element = document.getElementById("code-box");
-        element.remove();
-        element=document.createElement("p");
+        //remplacer le bloc indication par le bloc de question
+        let element=document.createElement("p");
         element.className="question";
         element.textContent="Quoi ?";
         document.body.replaceChild(element,document.getElementById("indication"));
+        console.log(typeof(document.getElementById("code-box")));
+        console.log(typeof(document.getElementById("indication")));
+        //remplacer le bloc code-box par un bloc de boutons de réponse
         element=document.createElement("div");
-        element.className("reponses")
-        child=document.createElement("button");
+        element.className="reponses";
+        let child=document.createElement("button");
         child.setAttribute("id","button1");
-        child.className("btn btn-rep");
+        child.className="btn btn-rep";
         child.textContent="Premiere personne"
         element.appendChild(child);
-        document.body.replaceChild(element,document.getElementById("start-btn"));
+        document.body.replaceChild(element,document.getElementById("code-box"));
+        //on supprime le start button
+        element = document.getElementById("start-btn");
+        element.remove();
+        //on affiche le code
+        document.getElementById("foot").style.visibility = "visible";
     }
     document.getElementById("code").textContent = localStorage.getItem('roomcode');
+    setInterval(updateInfo, 1000);
 }
 
+
 main();
-/*
-        <div class="reponses">
-            <button id="button1" class="btn btn-rep">Premiere personne</button>
-        </div>*/
