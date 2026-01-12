@@ -11,7 +11,7 @@ window.addEventListener('unload', function (e) {
 
 const backBtn = document.getElementById("back-btn");
     backBtn.addEventListener("click", function() {
-    window.location.href = "index.html";
+    window.location.href = "Index.html";
 });
 
 const copyBtn = document.getElementById("copy-btn");
