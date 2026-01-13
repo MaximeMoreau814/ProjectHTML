@@ -93,12 +93,19 @@ function updateInfo(){
 
 function buttons() {
     let roomCode = localStorage.getItem('roomcode');
-    const container = document.getElementById("Answer"); // Cible ton div existant
-    
+    let moi = localStorage.getItem('username');
+    const container = document.getElementById("Answer"); 
     if (!container) return;
     fetch('http://localhost:8080/part?room=' + roomCode)
     .then(response => response.json())
     .then(roomData => {
+        if (roomData.votes && roomData.votes[moi]) {
+            container.innerHTML = "<p class='msg-attente'>Vote enregistré !<br><span>Attente des autres joueurs...</span></p>";
+            if (Object.keys(roomData.votes).length === roomData.users.length) {
+                console.log("Tous les votes sont enregistrés.");
+            }
+            return;
+        }
         if(roomData.users && Array.isArray(roomData.users)){
             container.innerHTML = "";
             container.style.visibility = "visible"; 
@@ -109,7 +116,11 @@ function buttons() {
                 btn.style.fontSize = "40px";
                 btn.textContent = username;                
                 btn.onclick = function() {
-                    console.log("Vote pour : " + username);
+                    fetch(`http://localhost:8080/vote?r=${roomCode}&from=${moi}&to=${username}`)
+                    .then(() => {
+                        console.log("Vote envoyé pour : " + username);
+                        buttons(); 
+                    });
                 };
                 
                 container.appendChild(btn);
@@ -147,7 +158,6 @@ function main(){
         }
     }
     else{
-        console.log("oui");
         let roomCode = localStorage.getItem('roomcode');
         //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
         fetch('http://localhost:8080/part?room=' + roomCode)

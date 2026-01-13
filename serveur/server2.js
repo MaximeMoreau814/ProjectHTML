@@ -72,9 +72,9 @@ app.get('/create', function(req, res) {
             Rooms["room"+i] = {};
             Rooms["room"+i].name = req.query.r;
             Rooms["room"+i].question = "";
-            // CHANGED: Initialize users as an array with the first user
             Rooms["room"+i].users = [req.query.user];
             Rooms["room"+i].started = "false";
+            Rooms["room"+i].votes = {};
             i++;
             res.send(true);
         }
@@ -96,8 +96,6 @@ app.get('/delete', function(req, res) {
                 break;
             }
         }
-        
-        // CHANGED: Find and remove user from the users array
         if(roomname && Rooms[roomname].users){
             const userIndex = Rooms[roomname].users.indexOf(req.query.user);
             if(userIndex !== -1){
@@ -169,7 +167,7 @@ app.get('/question', function(req, res) {
         // Filter out empty lines
         words = words.filter(word => word.trim().length > 0);
         if(words.length > 0){
-            let Question = words[Math.floor(Math.random() * words.length)]; // redondance ?, mon commentaire au dessus
+            let Question = words[Math.floor(Math.random() * words.length)]; 
             for (var key in Rooms) {
                     if (Rooms[key].name == RoomCode) {
                         Rooms[key].question = Question;
@@ -189,6 +187,20 @@ app.get('/start_game', function(req, res) {
             Rooms[key].started = "true"; 
             res.send("true");
             return;
+        }
+    }
+    res.send("false");
+});
+app.get('/vote', function(req, res) {
+    let roomCode = req.query.r;
+    let fromUser = req.query.from; 
+    let toUser = req.query.to;     
+    
+    for (let key in Rooms) {
+        if (Rooms[key].name == roomCode) {
+            if (!Rooms[key].votes) Rooms[key].votes = {};
+            Rooms[key].votes[fromUser] = toUser;
+            return res.send("true");
         }
     }
     res.send("false");
