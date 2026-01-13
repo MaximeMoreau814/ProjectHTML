@@ -113,13 +113,20 @@ function main(){
         }
     }
     else{
+        
         //remplacer le bloc indication par le bloc de question
-        let element=document.createElement("p");
-        element.className="question";
-        element.textContent="Quoi ?";
-        document.body.replaceChild(element,document.getElementById("indication"));
-        console.log(typeof(document.getElementById("code-box")));
-        console.log(typeof(document.getElementById("indication")));
+        fetch('http://localhost:8080/question')
+            .then(response => response.text())
+            .then(questionRecue => {
+                let element = document.createElement("p");
+                element.className = "question";
+                element.textContent = questionRecue; 
+                
+                const indication = document.getElementById("indication");
+                if (indication) {
+                    document.body.replaceChild(element, indication);
+                }
+            });
         //remplacer le bloc code-box par un bloc de boutons de réponse
         element=document.createElement("div");
         element.className="reponses";
