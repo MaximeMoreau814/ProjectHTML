@@ -26,12 +26,22 @@ backBtn.addEventListener("click", function() {
 
 const copyBtn = document.getElementById("copy-btn");
 copyBtn.addEventListener("click", function() {
+    if(!localStorage.getItem('start')){
     text = document.getElementById("code-box").textContent;
     navigator.clipboard.writeText(text).then(() => {
         alert("Code copié : " + text);
     }).catch(() => {
         alert("Impossible de copier le code !");
     });
+    }
+    else{
+        text = document.getElementById("code").textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Code copié : " + text);
+        }).catch(() => {
+            alert("Impossible de copier le code !");
+        });
+    }
 });
 
 const startBtn = document.getElementById("start-btn");
