@@ -48,14 +48,13 @@ function updateInfo(){
         if (roomData == false) return;
         const listeuser = document.getElementById("users");
         listeuser.innerHTML = "";
-        for (const key in roomData) {
-            if (key.startsWith("user")) {
+        if(roomData.users && Array.isArray(roomData.users)){
+            roomData.users.forEach(username => {
                 let li = document.createElement("li");
-                li.textContent = roomData[key];
-                console.log(roomData[key]);
-                li.className="user";
+                li.textContent = username;
+                li.className = "user";
                 listeuser.appendChild(li);
-            }
+            });
         }
 
     });
