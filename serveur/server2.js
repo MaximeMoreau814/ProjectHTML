@@ -158,7 +158,7 @@ app.get('/json', function(req, res) {
     res.json(Rooms);
 });
 
-app.get('/question', function(req, res) { // PB ici, la question est changée autant de fois qu'il y a d'utilisateurs  
+app.get('/question', function(req, res) { 
     let RoomCode = req.query.r;
     fs.readFile('./serveur/Question.txt', 'utf-8', (err, data) => {
         if(err){

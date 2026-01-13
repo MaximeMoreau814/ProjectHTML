@@ -77,12 +77,43 @@ function updateInfo(){
         }
 
     });
+    if (localStorage.getItem('start') === "true") {
+            buttons(); 
+        }
+
     fetch('http://localhost:8080/part?room=' + roomCode)
     .then(response => response.json())
     .then(roomData => {
         if (roomData.started === "true" && !localStorage.getItem('start')) {
             localStorage.setItem("start", "true");
             main();
+        }
+    });
+}
+
+function buttons() {
+    let roomCode = localStorage.getItem('roomcode');
+    const container = document.getElementById("Answer"); // Cible ton div existant
+    
+    if (!container) return;
+    fetch('http://localhost:8080/part?room=' + roomCode)
+    .then(response => response.json())
+    .then(roomData => {
+        if(roomData.users && Array.isArray(roomData.users)){
+            container.innerHTML = "";
+            container.style.visibility = "visible"; 
+            container.style.position = "static";
+            roomData.users.forEach(username => {
+                let btn = document.createElement("button");
+                btn.className = "btn-rep";
+                btn.style.fontSize = "40px";
+                btn.textContent = username;                
+                btn.onclick = function() {
+                    console.log("Vote pour : " + username);
+                };
+                
+                container.appendChild(btn);
+            });
         }
     });
 }
@@ -132,15 +163,10 @@ function main(){
                 }
             });
         //remplacer le bloc code-box par un bloc de boutons de réponse
-        element=document.createElement("div");
-        element.className="reponses";
-        let child=document.createElement("button");
-        child.setAttribute("id","button1");
-        child.className="btn btn-rep";
-        child.textContent="Premiere personne"
-        element.appendChild(child);
-        document.body.replaceChild(element,document.getElementById("code-box"));
-        //on supprime le start button
+        element = document.getElementById("code-box");
+        element.remove();
+        buttons(); 
+
         element = document.getElementById("start-btn");
         element.remove();
         //on affiche le code
@@ -149,6 +175,8 @@ function main(){
     document.getElementById("code").textContent = localStorage.getItem('roomcode');
     setInterval(updateInfo, 1000);
 }
+
+
 
 
 main();
