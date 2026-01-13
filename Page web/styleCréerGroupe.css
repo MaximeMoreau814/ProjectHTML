@@ -139,3 +139,56 @@ input
 .btn-rep:hover {
     background-color: rgb(191, 141, 33);
 }
+
+block {
+    visibility: visible;
+    box-sizing: border-box;
+    width: 210px;
+    border: 3px solid #444;
+    border-radius: 0.3em;
+    margin-top: 20px;
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    bottom: calc(-100%);
+    background-color: #d5d5d5;
+}
+
+.userList {
+    margin-top: 110px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.user {
+    font-size: 1.2em;
+    padding: 5px;
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.btn-player {
+    visibility: hidden;
+    margin: 4px 2px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    font-size: 10%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-close-player {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+block h3 {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}

@@ -27,19 +27,19 @@ app.get('/', function(req, res) {
 });*/
 
 app.get('/add_usr', function(req, res) {
-    j=1
     create_user=true;
     if("r" in req.query && "user" in req.query) {
         for(var key in Rooms){
             if(Rooms[key].name==req.query.r){
                 for(var usr in Rooms[key]){
-                    j++;
                     if(Rooms[key][usr]==req.query.user){
                         create_user=false;
                     }
                 }
-                j--;
                 if(create_user){
+                    j = Object.keys(Rooms[key]).length;
+                    let index = Object.keys(Rooms[key])[j-1].length;
+                    j = 1 + parseInt(Object.keys(Rooms[key])[j-1][index-1]);
                     Rooms[key]["user"+j]=req.query.user;
                     res.send(true);
                 }
@@ -49,7 +49,7 @@ app.get('/add_usr', function(req, res) {
             }
         }
     } else {
-        res.send("Pas de parametres")
+        res.send("Pas de parametres");
     }
 });
 
@@ -81,6 +81,7 @@ app.get('/create', function(req, res) {
         if(create_room){
             Rooms["room"+i]={};
             Rooms["room"+i].name=req.query.r;
+            Rooms["room"+i]["questions"]={};
             Rooms["room"+i]["user1"]=req.query.user;
             i++;
             res.send(true);
@@ -89,7 +90,7 @@ app.get('/create', function(req, res) {
             throw(new Error("room déjà existante"));
         }
     } else {
-        res.send("Pas de parametres")
+        res.send("Pas de parametres");
     }
 });
 
@@ -110,35 +111,50 @@ app.get('/delete', function(req,res) {
             }
         }
         delete Rooms[roomname][username];
-        if(Object.keys(Rooms[roomname]).length==1){
+        if(Object.keys(Rooms[roomname]).length==2){
             delete Rooms[roomname];
         }
+    }
+    else{
+        res.send(false);
     }
 });
 
 app.get('/isroomvalid',function(req,res) {
+    room_exist=false;
     if("room" in req.query){
         for(var key in Rooms){
             if(Rooms[key].name == req.query.room){
                 res.send(true);
+                room_exist=true;
             }
         }
+        if(!room_exist){
+            res.send(false);
+        }
+    }
+    else{
         res.send(false);
     }
 });
 
 app.get('/part',function(req,res) {
+    room_exist=false;
     if("room" in req.query){
         for(var key in Rooms){
             if(Rooms[key].name == req.query.room){
-                res.send(Rooms[key])
+                res.send(Rooms[key]);
+                room_exist=true;
             }
         }
+        if(!room_exist){
+            res.send(false);
+        }
+    }
+    else{
         res.send(false);
     }
-})
-
-//app.get('/delete', function())
+});
 
 app.get('/json', function(req, res) {
     res.json(Rooms);
@@ -146,7 +162,8 @@ app.get('/json', function(req, res) {
 
 app.get('/question', function(req, res) {
     fs.readFile('./serveur/Question.txt', 'utf-8', (err,data) => {
-        res.send(data);
+        let words = data.split("\n");
+        res.send(words[Math.round(Math.random()*53)]);
     });
 });
 

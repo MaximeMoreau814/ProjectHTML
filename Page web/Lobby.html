@@ -16,10 +16,14 @@
 
         <div id="code-box">-----</div>
 
-        <div id="Liste-joueur" style="margin-top: 20px;"> 
+        <block id="Liste-joueur">
+            <button id="close-player-btn" class="btn-close-player">X</button>
             <h3>Joueurs connectés :</h3>
-            <ul id="users" style="list-style-type: none; padding: 0;"></ul>
-        </div>
+            <ul id="users" class="userList"></ul>
+        </block>
+
+        <button id="player-btn" class="btn-player">______<br>______<br>______</button>
+
         <div id="foot" class="foot">(code : <p2 id="code">-----</p2>)</div>
         <div class="button-container">
             <button id="copy-btn" class="btn btn-copy">Copier/Partager le code</button>

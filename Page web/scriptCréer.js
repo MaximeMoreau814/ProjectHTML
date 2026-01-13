@@ -9,6 +9,16 @@ window.addEventListener('unload', function (e) {
     localStorage.clear();
 });
 
+const block = document.getElementById("Liste-joueur");
+document.querySelector("#player-btn").addEventListener("click", function() {
+    block.style.visibility="visible";
+    document.getElementById("player-btn").style.visibility="hidden";
+});
+document.querySelector("#close-player-btn").addEventListener("click", function() {
+    block.style.visibility="hidden";
+    document.getElementById("player-btn").style.visibility="visible";
+});
+
 const backBtn = document.getElementById("back-btn");
 backBtn.addEventListener("click", function() {
     window.location.href = "Index.html";
@@ -43,12 +53,11 @@ function updateInfo(){
                 let li = document.createElement("li");
                 li.textContent = roomData[key];
                 console.log(roomData[key]);
-                li.style.fontSize = "1.2em";
-                li.style.padding = "5px";
+                li.className="user";
                 listeuser.appendChild(li);
             }
         }
- 
+
     });
 }
 
