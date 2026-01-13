@@ -54,6 +54,9 @@ const startBtn = document.getElementById("start-btn");
             console.log("Lancement de la partie");
         }
     });
+    fetch('http://localhost:8080/question?r=' + roomCode)
+    .then(res => res.json())
+    .then(data => {});
 });
 
 function updateInfo(){
@@ -113,15 +116,16 @@ function main(){
         }
     }
     else{
-        
-        //remplacer le bloc indication par le bloc de question
-        fetch('http://localhost:8080/question')
-            .then(response => response.text())
-            .then(questionRecue => {
+        console.log("oui");
+        let roomCode = localStorage.getItem('roomcode');
+        //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
+        fetch('http://localhost:8080/part?room=' + roomCode)
+            .then(res => res.json())
+            .then(data => {
                 let element = document.createElement("p");
                 element.className = "question";
-                element.textContent = questionRecue; 
-                
+                element.textContent = data.question;
+                console.log(data.question);
                 const indication = document.getElementById("indication");
                 if (indication) {
                     document.body.replaceChild(element, indication);

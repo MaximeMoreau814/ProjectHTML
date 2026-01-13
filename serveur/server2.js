@@ -71,7 +71,7 @@ app.get('/create', function(req, res) {
         if(create_room){
             Rooms["room"+i] = {};
             Rooms["room"+i].name = req.query.r;
-            Rooms["room"+i].questions = {};
+            Rooms["room"+i].question = "";
             // CHANGED: Initialize users as an array with the first user
             Rooms["room"+i].users = [req.query.user];
             Rooms["room"+i].started = "false";
@@ -158,7 +158,8 @@ app.get('/json', function(req, res) {
     res.json(Rooms);
 });
 
-app.get('/question', function(req, res) {
+app.get('/question', function(req, res) { // PB ici, la question est changée autant de fois qu'il y a d'utilisateurs  
+    let RoomCode = req.query.r;
     fs.readFile('./serveur/Question.txt', 'utf-8', (err, data) => {
         if(err){
             res.status(500).send("Error reading questions file");
@@ -168,7 +169,14 @@ app.get('/question', function(req, res) {
         // Filter out empty lines
         words = words.filter(word => word.trim().length > 0);
         if(words.length > 0){
-            res.send(words[Math.floor(Math.random() * words.length)]);
+            let Question = words[Math.floor(Math.random() * words.length)]; // redondance ?, mon commentaire au dessus
+            for (var key in Rooms) {
+                    if (Rooms[key].name == RoomCode) {
+                        Rooms[key].question = Question;
+                        res.send(Rooms[key]);
+                        break;
+                    }
+                }
         } else {
             res.send("No questions available");
         }
