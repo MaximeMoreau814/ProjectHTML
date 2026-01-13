@@ -113,7 +113,6 @@ function buttons() {
             roomData.users.forEach(username => {
                 let btn = document.createElement("button");
                 btn.className = "btn-rep";
-                btn.style.fontSize = "40px";
                 btn.textContent = username;                
                 btn.onclick = function() {
                     fetch(`http://localhost:8080/vote?r=${roomCode}&from=${moi}&to=${username}`)
@@ -186,7 +185,26 @@ function main(){
     setInterval(updateInfo, 1000);
 }
 
-
-
-
 main();
+
+function next(){
+    body.h1.style.fontsize="1em";
+    let roomCode = localStorage.getItem('roomcode');
+    //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
+    let element = document.createElement("p");
+    element.className = "question";
+    element.textContent = "data.question";
+    const indication = document.getElementById("indication");
+    if (indication) {
+        document.body.replaceChild(element, indication);
+    }
+    //remplacer le bloc code-box par un bloc de boutons de réponse
+    element = document.getElementById("code-box");
+    element.remove();
+    buttons(); 
+
+    element = document.getElementById("start-btn");
+    element.remove();
+    //on affiche le code
+    document.getElementById("foot").style.visibility = "visible";
+}

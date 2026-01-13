@@ -180,30 +180,42 @@ app.get('/question', function(req, res) {
         }
     });
 });
+
 app.get('/start_game', function(req, res) {
-    let roomCode = req.query.r;
-    for (let key in Rooms) {
-        if (Rooms[key].name === roomCode) {
-            Rooms[key].started = "true"; 
-            res.send("true");
-            return;
+    if("r" in req.query){
+        let roomCode = req.query.r;
+        for (let key in Rooms) {
+            if (Rooms[key].name === roomCode) {
+                Rooms[key].started = "true"; 
+                res.send("true");
+                return;
+            }
         }
+        res.send("false")
     }
-    res.send("false");
+    else{
+        res.send("false");
+    }
 });
+
 app.get('/vote', function(req, res) {
-    let roomCode = req.query.r;
-    let fromUser = req.query.from; 
-    let toUser = req.query.to;     
-    
-    for (let key in Rooms) {
-        if (Rooms[key].name == roomCode) {
-            if (!Rooms[key].votes) Rooms[key].votes = {};
-            Rooms[key].votes[fromUser] = toUser;
-            return res.send("true");
+    if("r" in req.query && "from" in req.query && "to" in req.query){
+        let roomCode = req.query.r;
+        let fromUser = req.query.from; 
+        let toUser = req.query.to;     
+        
+        for (let key in Rooms) {
+            if (Rooms[key].name == roomCode) {
+                if (!Rooms[key].votes) Rooms[key].votes = {};
+                Rooms[key].votes[fromUser] = toUser;
+                return res.send("true");
+            }
         }
+        res.send("false")
     }
-    res.send("false");
+    else{
+        res.send("false");
+    }
 });
 
 app.listen(8080); //commence à accepter les requêtes
