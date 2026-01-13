@@ -16,7 +16,101 @@ p {
     margin: 20px auto;
 }
 
-.foot {
+#code-box {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-top: 30px;
+    background: white;
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    letter-spacing: 8px;
+}
+
+#Liste-joueur {
+    visibility: hidden;
+    box-sizing: border-box;
+    width: 210px;
+    border: 3px solid #444;
+    border-radius: 0.3em;
+    margin-top: 20px;
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    bottom: calc(-100%);
+    background-color: #d5d5d5;
+}
+
+#Liste-joueur h3 {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+#close-player-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+#users {
+    margin-top: 110px;
+    padding: 0;
+}
+
+.user {
+    font-size: 1.2em;
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+#player-btn {
+    visibility: visible;
+    margin: 4px 2px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    font-size: 10%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+#player-btn:hover {
+    background-color:rgb(206, 206, 206)
+}
+
+#Answer {
+    display: flex;
+    flex-direction: column; 
+    align-items:center;    
+    gap: 15px;
+    width: 500px;
+    margin: 20px auto;
+}
+
+.btn-rep {
+    color: #222;
+    background-color: rgb(228, 168, 40);
+    font-size: 40px;         
+    font-weight: bold;      
+    padding: 20px 40px;     
+    width: 80%;
+    max-width: 500px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-rep:hover {
+    background-color: rgb(191, 141, 33);
+}
+
+#foot {
     margin-top: 30px;
     visibility: hidden;
     font-size: 0.7em;
@@ -30,49 +124,72 @@ p {
     gap: 15px; 
 }
 
-
 .btn {
-    padding: 12px 25px;
-    font-size: 1.1em;
     border-radius: 8px;
     cursor: pointer;
-    text-decoration: none;
     color: white;
     transition: 0.2s;
-    width: 200px; 
-    display: block; 
-    text-align: center;
+    width: 200px;
 }
 
-.btn-copy {
+#copy-btn {
     background-color: #808080;
     font-size: 0.9em;     
     padding: 6px 15px;
 }
 
-.btn-copy:hover {
+#copy-btn:hover {
     background-color: #5E5C5C;
 }
 
-.btn-start {
+#start-btn {
     background-color: #B33924;
     font-size: 1.8em;     
     padding: 25px 50px;
     width: 350px;
 }
 
-.btn-start:hover {
+#start-btn:hover {
     background-color: #8A2E1D;
 }
-.btn-back {
+
+#back-btn {
     background-color: rgb(4, 170, 60);
     font-size: 0.95em;
     padding: 10px 25px;
 }
 
-.btn-back:hover {
+#back-btn:hover {
     background-color: #027c08;
 }
+
+.msg-attente {
+    font-size: 3.5rem;      
+    font-weight: bold;
+    color: #222;
+    margin-top: 60px;
+    line-height: 1.2;
+}
+
+.anim {
+    left: -300px;
+    top: 0px;
+    height:100px;
+    background-color: white;
+    position: relative;
+    animation-name: myAnimation;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+}
+
+@keyframes myAnimation {
+    from    {background-color:red; width:0px;}
+    to      {background-color:red; width:600px; left:0px}
+}
+
+
+
+
 .btn-valid {
     background-color: rgb(4, 170, 60);
     font-size: 0.95em;
@@ -81,18 +198,6 @@ p {
 
 .btn-valid:hover {
     background-color: #027c08;
-}
-
-#code-box {
-    font-size: 2.5em;
-    font-weight: bold;
-    margin-top: 30px;
-    background: white;
-    display: inline-block;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    letter-spacing: 8px;
 }
 
 input
@@ -124,104 +229,6 @@ input
     flex-direction: column; 
     align-items: center;
     gap: 15px; 
-}
-
-.btn-rep {
-    color: #222;
-    display: inline-block;
-    background-color: rgb(228, 168, 40);
-    font-size: 0.95em;
-    padding: 10px 25px;
-}
-
-.btn-rep:hover {
-    background-color: rgb(191, 141, 33);
-}
-
-block {
-    visibility: visible;
-    box-sizing: border-box;
-    width: 210px;
-    border: 3px solid #444;
-    border-radius: 0.3em;
-    margin-top: 20px;
-    position: absolute;
-    top: -20px;
-    right: 0px;
-    bottom: calc(-100%);
-    background-color: #d5d5d5;
-}
-
-.userList {
-    margin-top: 110px;
-    list-style-type: none;
-    padding: 0;
-}
-
-.user {
-    font-size: 1.2em;
-    padding: 5px;
-    margin-top: 10px;
-    list-style-type: none;
-    padding: 0;
-}
-
-.btn-player {
-    visibility: hidden;
-    margin: 4px 2px;
-    border-radius: 50%;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 15px;
-    font-size: 10%;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.btn-close-player {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-block h3 {
-    position: absolute;
-    top: 40px;
-    right: 10px;
-}
-#Answer {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
-
-}
-
-.btn-rep {
-    color: #222;
-    display: inline-block;
-    background-color: rgb(228, 168, 40);
-    font-size: 40px;         
-    font-weight: bold;      
-    padding: 20px 40px;     
-    width: 80%;
-    max-width: 500px;
-    border-radius: 12px;
-    cursor: pointer;
-}
-
-.btn-rep:hover {
-    background-color: rgb(191, 141, 33);
-}
-.msg-attente {
-    font-size: 3.5rem;      
-    font-weight: bold;
-    color: #222;
-    margin-top: 60px;
-    line-height: 1.2;
 }
 
 .msg-attente span {

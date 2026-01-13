@@ -75,12 +75,10 @@ function updateInfo(){
                 listeuser.appendChild(li);
             });
         }
-
     });
     if (localStorage.getItem('start') === "true") {
             buttons(); 
         }
-
     fetch('http://localhost:8080/part?room=' + roomCode)
     .then(response => response.json())
     .then(roomData => {
@@ -100,9 +98,12 @@ function buttons() {
     .then(response => response.json())
     .then(roomData => {
         if (roomData.votes && roomData.votes[moi]) {
-            container.innerHTML = "<p class='msg-attente'>Vote enregistré !<br><span>Attente des autres joueurs...</span></p>";
+            if(!container.getElementsByClassName("msg-attente").length != 0){
+                container.innerHTML = "<p class='msg-attente'>Vote enregistré !<br><span>Attente des autres joueurs...</span></p>";
+            }
             if (Object.keys(roomData.votes).length === roomData.users.length) {
                 console.log("Tous les votes sont enregistrés.");
+                result();
             }
             return;
         }
@@ -126,6 +127,16 @@ function buttons() {
             });
         }
     });
+}
+
+function result() {
+    const container = document.getElementById("Answer"); 
+    if(!container.getElementsByClassName("anim").length != 0){
+        let btn = document.createElement("div");
+        btn.className = "anim";
+        btn.innerText = "Rémi";
+        container.appendChild(btn);
+    }
 }
 
 function main(){
@@ -157,6 +168,7 @@ function main(){
         }
     }
     else{
+        document.getElementById("bienvenue").style.fontSize="1em";
         let roomCode = localStorage.getItem('roomcode');
         //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
         fetch('http://localhost:8080/part?room=' + roomCode)
@@ -188,23 +200,6 @@ function main(){
 main();
 
 function next(){
-    body.h1.style.fontsize="1em";
-    let roomCode = localStorage.getItem('roomcode');
-    //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
-    let element = document.createElement("p");
-    element.className = "question";
-    element.textContent = "data.question";
-    const indication = document.getElementById("indication");
-    if (indication) {
-        document.body.replaceChild(element, indication);
-    }
-    //remplacer le bloc code-box par un bloc de boutons de réponse
-    element = document.getElementById("code-box");
-    element.remove();
-    buttons(); 
-
-    element = document.getElementById("start-btn");
-    element.remove();
-    //on affiche le code
-    document.getElementById("foot").style.visibility = "visible";
 }
+
+next()
