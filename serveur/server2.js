@@ -74,6 +74,7 @@ app.get('/create', function(req, res) {
             Rooms["room"+i].questions = {};
             // CHANGED: Initialize users as an array with the first user
             Rooms["room"+i].users = [req.query.user];
+            Rooms["room"+i].started = "false";
             i++;
             res.send(true);
         }
@@ -172,6 +173,17 @@ app.get('/question', function(req, res) {
             res.send("No questions available");
         }
     });
+});
+app.get('/start_game', function(req, res) {
+    let roomCode = req.query.r;
+    for (let key in Rooms) {
+        if (Rooms[key].name === roomCode) {
+            Rooms[key].started = "true"; 
+            res.send("true");
+            return;
+        }
+    }
+    res.send("false");
 });
 
 app.listen(8080); //commence à accepter les requêtes

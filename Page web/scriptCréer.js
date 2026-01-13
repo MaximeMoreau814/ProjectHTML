@@ -36,8 +36,14 @@ copyBtn.addEventListener("click", function() {
 
 const startBtn = document.getElementById("start-btn");
     startBtn.addEventListener("click", function() {
-    localStorage.setItem("start","true");
-    main();
+    let roomCode = localStorage.getItem('roomcode');
+    fetch('http://localhost:8080/start_game?r=' + roomCode)
+    .then(response => response.text())
+    .then(data => {
+        if(data === "true") {
+            console.log("Lancement de la partie");
+        }
+    });
 });
 
 function updateInfo(){
@@ -57,6 +63,14 @@ function updateInfo(){
             });
         }
 
+    });
+    fetch('http://localhost:8080/part?room=' + roomCode)
+    .then(response => response.json())
+    .then(roomData => {
+        if (roomData.started === "true" && !localStorage.getItem('start')) {
+            localStorage.setItem("start", "true");
+            main();
+        }
     });
 }
 
