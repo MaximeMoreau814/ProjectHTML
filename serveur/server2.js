@@ -217,6 +217,18 @@ app.get('/vote', function(req, res) {
         res.send("false");
     }
 });
+app.get('/question_suivante', function(req, res) { // faut utilser un fetch pour ça et un fetch pour la question et normalement on est good mais j'ai pas eu l'occas de tester
+    let roomCode = req.query.r;
+    for (let key in Rooms) {
+        if (Rooms[key].name == roomCode) {
+            Rooms[key].votes = {};
+            return res.send("true");
+        }
+    }
+    res.send("false");
+});
+
+//On  peut peut-être faire une route pour stop  la game genre ? jsp
 
 app.listen(8080); //commence à accepter les requêtes
 console.log("App listening on port 8080...");
