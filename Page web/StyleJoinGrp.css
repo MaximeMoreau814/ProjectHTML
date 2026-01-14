@@ -1,77 +1,102 @@
 
 body {
-    font-family: Arial, sans-serif;
+    background: url("question_marks_background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.6);
+    
+    min-height: 100vh;
+    margin: 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Roboto, sans-serif;
     text-align: center;
-    background: #f3f3f3;
-    padding: 50px;
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 15px;
+    background: rgba(255,255,255,0.6);
+    font-size: 0.8em;
+    color: #555;
 }
 
 h1 {
-    font-size: 2em;
-    color: #222;
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 50px;
 }
-
 
 p {
     font-size: 1.1em;
-    color: #444;
+    color: #555;
     max-width: 600px;
     margin: 20px auto;
+    background: rgba(255,255,255,0.7);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+input#code {
+    height: 70px;
+    width: 250px;
+    font-size: 3em;
+    text-align: center;
+    border: 2px solid #007bff;
+    border-radius: 15px;
+    background-color: white;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-top: 20px;
 }
 
 .button-container {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column; 
     align-items: center;
-    gap: 15px; 
-}
-
-.erreur {
-    display: block;
-    color: red;
-    font-size: 1.8em;
+    gap: 20px; 
+    margin-bottom: 40px; 
 }
 
 .btn {
-    padding: 12px 25px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    cursor: pointer;
     text-decoration: none;
-    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
     transition: 0.2s;
-    width: 200px; 
-    display: block; 
-    text-align: center;
 }
 
 .btn-join {
-    background-color: #ff0000;
-    font-size: 1.8em;     
-    padding: 25px 50px;
-    width: 250px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-size: 1.5em;     
+    padding: 15px 50px;
+    width: auto;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
-
-.btn-join:hover {
-    background-color: #b90000;
-}
+.btn-join:hover { transform: scale(1.05); }
 
 .btn-back {
-    background-color: rgb(4, 170, 60);
-    font-size: 0.95em;
-    padding: 10px 25px;
+    background-color: transparent;
+    border: 2px solid #555;
+    color: #555;
+    font-size: 1em;
+    padding: 10px 30px;
+    width: 200px;
 }
+.btn-back:hover { background-color: #555; color: white; }
 
-.btn-back:hover {
-    background-color: #027c08;
-}
-
-input
-{
-    height: 50px;
-    width: 250px;
-    font-size: 3.5em;
-    text-align: center;
-    border-radius: 10px;
+.erreur {
+    display: none; /* Caché par défaut via JS, mais CSS prêt */
+    color: #e74c3c;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: rgba(255, 230, 230, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
 }

@@ -1,8 +1,20 @@
 
 body {
+    background: url("question_marks_background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    
+    /* Ajoute un filtre blanc semi-transparent par-dessus l'image */
+    box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.6);
+    
+    min-height: 100vh;
+    margin: 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: Arial, sans-serif;
     text-align: center;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
     padding: 50px;
 }
 
