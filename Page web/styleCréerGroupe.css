@@ -201,15 +201,14 @@ input.zone-saisie {
 
 
 .anim {
-    width: 0px;
-    height: 100px;
+    width: 10px;
+    height: 70px;
     background-color: red;
-    position: relative;
-    line-height: 80px; /* Centre verticalement le texte */
+    position: absolute;
+    line-height: 70px; /* Centre verticalement le texte */
     border-radius: 10px;
     margin-top: 20px;
-    right: 0px;
-    left: 100px;
+    left: 500px;
     font-weight: bold;
     font-size: 1.5em;
     color: rgb(0, 0, 0);

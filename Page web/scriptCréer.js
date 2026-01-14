@@ -1,11 +1,10 @@
 var i=0;
+var votemax = 400;
 
 function myMove(wmax,idEle) {
     var id = null;
     var elem = document.getElementById(idEle);
     var width = 0;
-    elem.style.left = "-300px";
-    var pos = -300; 
     clearInterval(id);
     id = setInterval(frame, 10);
     function frame() {
@@ -14,11 +13,6 @@ function myMove(wmax,idEle) {
         } else {
             width++;
             elem.style.width = width + 'px';
-            if(pos!=-300+wmax/2){
-                pos=pos-1/(-300+wmax/2);
-                console.log(pos);
-                elem.style.left = Math.round(pos) + 'px';
-            }
         }
     }
 }
@@ -124,9 +118,9 @@ function buttons() {
     .then(roomData => {
         if (roomData.votes && roomData.votes[moi]) {
             if(!container.getElementsByClassName("msg-attente").length != 0){
-                container.innerHTML = "<p class='msg-attente'>Vote enregistré !<br><span>Attente des autres joueurs...</span></p>";
+                container.innerHTML = "<p class='msg-attente' id='msg-att'>Vote enregistré !<br><span>Attente des autres joueurs...</span></p>";
             }
-            if (Object.keys(roomData.votes).length === roomData.users.length) {
+            if (Object.keys(roomData.votes).length >= roomData.users.length) {
                 console.log("Tous les votes sont enregistrés.");
                 result();
             }
@@ -155,27 +149,47 @@ function buttons() {
 }
 
 function result() {
-    const container = document.getElementById("Answer"); 
-    container.style.alignItems = "normal";
-    if(container.getElementsByClassName("anim").length == 0){
-        let anim = document.createElement("div");
-        anim.className = "anim";
-        anim.id = "anim"+i
-        anim.innerText = "Rémi";
-        container.appendChild(anim);
-        myMove(400,"anim"+i)
-    }
-    else{
-        if(container.getElementsByClassName("anim").length == 1){
-            let anim = document.createElement("div");
-            anim.className = "anim";
-            anim.id = "anim"+i
-            anim.innerText = "Maxime";
-            container.appendChild(anim);
-            myMove(200,"anim"+i)
+    let top=0;
+    let Macron = {};
+    fetch('http://localhost:8080/part?room=' + localStorage.getItem('roomcode'))
+    .then(response => response.json())
+    .then(roomData => {
+        document.getElementById("msg-att").style.visibility = "hidden";
+        const container = document.getElementById("Answer"); 
+        container.style.alignItems = "normal";
+        document.getElementById("foot").style.marginTop = 20+60*(roomData.users.length-1) + "px";
+        for(var key in roomData.votes){
+            if(!Macron[roomData.votes[key]]){
+                Macron[roomData.votes[key]]=1;
+            }
+            else{
+                Macron[roomData.votes[key]]++;
+            }
         }
-    }
-    i++;
+        for(var key in roomData.users){
+            if(!Macron[roomData.users[key]]){
+                Macron[roomData.users[key]]=0;
+            }
+        }
+        if(container.getElementsByClassName("anim").length == 0){
+            for(var key in Macron){
+                let anim = document.createElement("div");
+                anim.className = "anim";
+                anim.id = "anim"+i
+                anim.innerText = key + ":" + Math.round((votemax*Macron[key]/roomData.users.length)/4) + "%";
+                if(top > 0){
+                    anim.style.top = top+"px";
+                    top+=100;
+                }
+                else{
+                    top=300;
+                }
+                container.appendChild(anim);
+                myMove(Math.round(votemax*Macron[key]/roomData.users.length),"anim"+i)
+                i++;
+            }
+        }
+    });
 }
 
 function main(){
@@ -249,6 +263,3 @@ function next(){
         myMove(400,"anim"+i)
     }
 }
-
-myMove(600,"anim0");
-myMove(300,"anim1");
