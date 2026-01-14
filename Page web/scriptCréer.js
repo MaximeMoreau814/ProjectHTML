@@ -1,3 +1,5 @@
+var i=0;
+
 window.onbeforeunload = function(e) {
     e.preventDefault();
 }
@@ -130,13 +132,33 @@ function buttons() {
 }
 
 function result() {
+    var syleSheet = document.getElementsByTagName("style").sheet;
+    var r = document.querySelector(':root');
     const container = document.getElementById("Answer"); 
-    if(!container.getElementsByClassName("anim").length != 0){
+    container.style.alignItems = "normal";
+    if(container.getElementsByClassName("anim").length == 0){
+        sheet.insertRule(`@keyframes ${"anim"+i} {}`, sheet.cssRules.length);
+        const keyframesRule = Array.from(sheet.cssRules).find(
+        rule => rule.name === "anim"+i && rule.type === CSSRule.KEYFRAMES_RULE
+        );
+        keyframesRule.appendRule('from { width: 0px; }');
+        keyframesRule.appendRule('to { width: 300px; }');
         let btn = document.createElement("div");
         btn.className = "anim";
         btn.innerText = "Rémi";
+        btn.style.animation = '${"anim"+i} 5s both'
         container.appendChild(btn);
     }
+    else{
+        if(container.getElementsByClassName("anim").length == 1){
+            r.style.setProperty('--final-anim','600px');
+            let btn = document.createElement("div");
+            btn.className = "anim";
+            btn.innerText = "Maxime";
+            container.appendChild(btn);
+        }
+    }
+    i++;
 }
 
 function main(){

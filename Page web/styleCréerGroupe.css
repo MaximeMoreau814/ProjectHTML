@@ -1,3 +1,7 @@
+:root {
+    --final-anim: 600px;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -172,10 +176,11 @@ p {
 }
 
 .anim {
-    left: -300px;
+    right: 0px;
+    left: 0px;
     top: 0px;
     height:100px;
-    background-color: white;
+    background-color: red;
     position: relative;
     animation-name: myAnimation;
     animation-duration: 5s;
@@ -183,8 +188,8 @@ p {
 }
 
 @keyframes myAnimation {
-    from    {background-color:red; width:0px;}
-    to      {background-color:red; width:600px; left:0px}
+    from    {width:0px;}
+    to      {width:var(--final-anim);}
 }
 
 
