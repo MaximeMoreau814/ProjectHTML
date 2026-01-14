@@ -1,5 +1,28 @@
 var i=0;
 
+function myMove(wmax,idEle) {
+    var id = null;
+    var elem = document.getElementById(idEle);
+    var width = 0;
+    elem.style.left = "-300px";
+    var pos = -300; 
+    clearInterval(id);
+    id = setInterval(frame, 10);
+    function frame() {
+        if (width == wmax) {
+        clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + 'px';
+            if(pos!=-300+wmax/2){
+                pos=pos-1/(-300+wmax/2);
+                console.log(pos);
+                elem.style.left = Math.round(pos) + 'px';
+            }
+        }
+    }
+}
+
 window.onbeforeunload = function(e) {
     e.preventDefault();
 }
@@ -132,30 +155,24 @@ function buttons() {
 }
 
 function result() {
-    var syleSheet = document.getElementsByTagName("style").sheet;
-    var r = document.querySelector(':root');
     const container = document.getElementById("Answer"); 
     container.style.alignItems = "normal";
     if(container.getElementsByClassName("anim").length == 0){
-        sheet.insertRule(`@keyframes ${"anim"+i} {}`, sheet.cssRules.length);
-        const keyframesRule = Array.from(sheet.cssRules).find(
-        rule => rule.name === "anim"+i && rule.type === CSSRule.KEYFRAMES_RULE
-        );
-        keyframesRule.appendRule('from { width: 0px; }');
-        keyframesRule.appendRule('to { width: 300px; }');
-        let btn = document.createElement("div");
-        btn.className = "anim";
-        btn.innerText = "Rémi";
-        btn.style.animation = '${"anim"+i} 5s both'
-        container.appendChild(btn);
+        let anim = document.createElement("div");
+        anim.className = "anim";
+        anim.id = "anim"+i
+        anim.innerText = "Rémi";
+        container.appendChild(anim);
+        myMove(400,"anim"+i)
     }
     else{
         if(container.getElementsByClassName("anim").length == 1){
-            r.style.setProperty('--final-anim','600px');
-            let btn = document.createElement("div");
-            btn.className = "anim";
-            btn.innerText = "Maxime";
-            container.appendChild(btn);
+            let anim = document.createElement("div");
+            anim.className = "anim";
+            anim.id = "anim"+i
+            anim.innerText = "Maxime";
+            container.appendChild(anim);
+            myMove(200,"anim"+i)
         }
     }
     i++;
@@ -222,6 +239,16 @@ function main(){
 main();
 
 function next(){
+    const container = document.getElementById("Answer"); 
+    container.style.alignItems = "normal";
+    if(container.getElementsByClassName("anim").length == 0){
+        let anim = document.createElement("div");
+        anim.className = "anim anim"+i;
+        anim.innerText = "Rémi";
+        container.appendChild(anim);
+        myMove(400,"anim"+i)
+    }
 }
 
-next()
+myMove(600,"anim0");
+myMove(300,"anim1");

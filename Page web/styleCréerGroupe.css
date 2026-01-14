@@ -201,43 +201,20 @@ input.zone-saisie {
 
 
 .anim {
+    width: 0px;
+    height: 100px;
+    background-color: red;
     position: relative;
-    height: 80px;
+    display:;
     line-height: 80px; /* Centre verticalement le texte */
-    background-color: #fff;
     border-radius: 10px;
-    margin: 20px auto;
+    margin-top: 20px;
+    right: 0px;
+    left: 100px;
     font-weight: bold;
     font-size: 1.5em;
-    color: white;
-    overflow: hidden; /* Pour garder les coins ronds */
+    color: rgb(0, 0, 0);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    
-    /* Animation settings */
-    left: -100%; /* Départ hors écran */
-    width: 50px;
-    animation-name: myAnimation;
-    animation-duration: 3s; 
-    animation-fill-mode: forwards; 
-    animation-timing-function: ease-out;
-}
-
-@keyframes myAnimation {
-    0% {
-        background-color: #e74c3c; 
-        width: 10%; 
-        left: -50%;
-    }
-    50% {
-        background-color: #f1c40f; 
-        width: 50%; 
-    }
-    100% {
-        background-color: #2ecc71; 
-        width: 80%; /* Largeur finale */
-        left: 0;
-        margin: 20px auto; /* Recentrage */
-    }
 }
 
 #foot {
