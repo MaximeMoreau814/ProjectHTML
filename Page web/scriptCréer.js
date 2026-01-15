@@ -115,6 +115,12 @@ function updateInfo(){
             localStorage.setItem("start", "true");
             main();
         }
+
+        if (!roomData || !roomData.users.includes(localStorage.getItem('username'))) {
+                localStorage.clear();
+                window.location.href = "Index.html"; 
+                return;
+            }
     });
 }
 
@@ -233,14 +239,18 @@ function main(){
                 if (isValid === "true") {
                     fetch('http://localhost:8080/add_usr?r=' + roomCode + '&user=' + username)
                         .then(() => {
-                            localStorage.removeItem('quit'); 
+                            localStorage.removeItem('quit');
                             main(); 
+                        })
+                        .catch(() => {
+                            window.location.href = "Index.html";
                         });
+                    return;
                 } else {
                     localStorage.removeItem('roomcode');
                     localStorage.removeItem('quit');
                     localStorage.removeItem('start');
-                    main();
+                    main(); 
                 }
             });
     } 
