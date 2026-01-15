@@ -205,7 +205,7 @@ function result() {
         nextBtn.className = "btn-next";     
         nextBtn.textContent = "Question Suivante";
         nextBtn.style.position = "absolute";
-        nextBtn.style.top = (top + 40) + "px";
+        nextBtn.style.top = (top + 40) + "px"; 
         nextBtn.style.left = "50%";
         nextBtn.style.transform = "translateX(-50%)"; 
         nextBtn.style.margin = "0";
