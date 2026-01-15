@@ -101,6 +101,10 @@ app.get('/delete', function(req, res) {
             if(userIndex !== -1){
                 // Remove user from array
                 Rooms[roomname].users.splice(userIndex, 1);
+
+                if (Rooms[roomname].votes && Rooms[roomname].votes[req.query.user]) {
+                    delete Rooms[roomname].votes[req.query.user];
+                }
                 
                 // Check if room should be deleted (only name, users array, and questions left)
                 if(Rooms[roomname].users.length === 0){
