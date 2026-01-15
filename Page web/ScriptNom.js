@@ -1,7 +1,9 @@
 if(localStorage.getItem('username')){
     window.location.href = "Lobby.html";
 }
-
+if(localStorage.getItem('quit')){
+    window.location.href = "Index.html";
+}
 function verif_champ() 
 {
     var Pseudo =document.getElementById("Pseudo").value;

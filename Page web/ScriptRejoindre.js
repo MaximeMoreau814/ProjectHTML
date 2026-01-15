@@ -32,3 +32,9 @@ button.addEventListener("click", () => {
         error.style.display = "block";
     }
 });
+console.log(localStorage.getItem('quit'));
+if(localStorage.getItem('quit')){
+    localStorage.removeItem('quit');
+    localStorage.clear();
+    console.log("clear");
+}

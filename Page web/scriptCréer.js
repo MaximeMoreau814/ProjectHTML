@@ -25,7 +25,7 @@ window.addEventListener('unload', function (e) {
     fetch('http://localhost:8080/delete?r='+localStorage.getItem('roomcode')+"&user="+localStorage.getItem('username'), {
             keepalive: true // this is important!
         });
-    localStorage.clear();
+    localStorage.setItem('quit', 'true');
 });
 
 const block = document.getElementById("Liste-joueur");
@@ -223,58 +223,81 @@ function result() {
 }
 
 function main(){
-    if(!localStorage.getItem('start')){
-        if(!localStorage.getItem('roomcode')){
-            let code="";
-            function generateCode() {
-                const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-                for (let i = 0; i < 5; i++) {
-                    code += letters[Math.floor(Math.random()*26)];
-                }
-                //document.getElementById("code-box").textContent = code;
-                fetch('http://localhost:8080/create?r='+code+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
-                    if(data =! "true"){
-                        generateCode();
-                    }
-                });
-            }
-            generateCode();
-            localStorage.setItem('roomcode',code);
-            document.getElementById("code-box").textContent = code;
-
-        }
-        else{
-            let text=localStorage.getItem('roomcode');
-            document.getElementById("code-box").textContent = text;
-            console.log(text);
-        }
-    }
-    else{
-        document.getElementById("bienvenue").style.fontSize="1em";
-        let roomCode = localStorage.getItem('roomcode');
-        //remplacer le bloc indication par le bloc de question
-        fetch('http://localhost:8080/part?room=' + roomCode)
-            .then(res => res.json())
-            .then(data => {
-                let element = document.createElement("p");
-                element.className = "question";
-                element.textContent = data.question;
-                console.log(data.question);
-                const indication = document.getElementById("indication");
-                if (indication) {
-                    document.body.replaceChild(element, indication);
+    const quit = localStorage.getItem('quit');
+    const roomCode = localStorage.getItem('roomcode');
+    const username = localStorage.getItem('username');
+    if (quit === 'true' && roomCode) {
+        fetch('http://localhost:8080/isroomvalid?room=' + roomCode)
+            .then(res => res.text())
+            .then(isValid => {
+                if (isValid === "true") {
+                    fetch('http://localhost:8080/add_usr?r=' + roomCode + '&user=' + username)
+                        .then(() => {
+                            localStorage.removeItem('quit'); 
+                            main(); 
+                        });
+                } else {
+                    localStorage.removeItem('roomcode');
+                    localStorage.removeItem('quit');
+                    localStorage.removeItem('start');
+                    main();
                 }
             });
-        //remplacer le bloc code-box par un bloc de boutons de réponse
-        element = document.getElementById("code-box");
-        element.remove();
-        buttons(); 
+    } 
+    else {
+        if(!localStorage.getItem('start')){
+            if(!localStorage.getItem('roomcode')){
+                let code="";
+                function generateCode() {
+                    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        element = document.getElementById("start-btn");
-        element.remove();
-        //on affiche le code
-        document.getElementById("foot").style.visibility = "visible";
+                    for (let i = 0; i < 5; i++) {
+                        code += letters[Math.floor(Math.random()*26)];
+                    }
+                    //document.getElementById("code-box").textContent = code;
+                    fetch('http://localhost:8080/create?r='+code+"&user="+localStorage.getItem('username')).then(response => response.text()).then(data => {
+                        if(data =! "true"){
+                            generateCode();
+                        }
+                    });
+                }
+                generateCode();
+                localStorage.setItem('roomcode',code);
+                document.getElementById("code-box").textContent = code;
+
+            }
+            else{
+                let text=localStorage.getItem('roomcode');
+                document.getElementById("code-box").textContent = text;
+                console.log(text);
+            }
+        }
+        else{
+            document.getElementById("bienvenue").style.fontSize="1em";
+            let roomCode = localStorage.getItem('roomcode');
+            //remplacer le bloc indication par le bloc de question
+            fetch('http://localhost:8080/part?room=' + roomCode)
+                .then(res => res.json())
+                .then(data => {
+                    let element = document.createElement("p");
+                    element.className = "question";
+                    element.textContent = data.question;
+                    console.log(data.question);
+                    const indication = document.getElementById("indication");
+                    if (indication) {
+                        document.body.replaceChild(element, indication);
+                    }
+                });
+            //remplacer le bloc code-box par un bloc de boutons de réponse
+            element = document.getElementById("code-box");
+            element.remove();
+            buttons(); 
+
+            element = document.getElementById("start-btn");
+            element.remove();
+            //on affiche le code
+            document.getElementById("foot").style.visibility = "visible";
+        }
     }
     document.getElementById("code").textContent = localStorage.getItem('roomcode');
     setInterval(updateInfo, 1000);
