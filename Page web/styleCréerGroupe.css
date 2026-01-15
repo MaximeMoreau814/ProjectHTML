@@ -205,10 +205,10 @@ input.zone-saisie {
     height: 70px;
     background-color: red;
     position: absolute;
-    line-height: 70px; /* Centre verticalement le texte */
+    line-height: 70px; 
     border-radius: 10px;
     margin-top: 20px;
-    left: 500px;
+    left: calc(50% - 200px);
     font-weight: bold;
     font-size: 1.5em;
     color: rgb(0, 0, 0);
@@ -219,4 +219,28 @@ input.zone-saisie {
     margin-top: 10px;
     visibility: hidden;
     font-size: 0.8em;
+}
+
+.btn-next {
+    display: block; 
+    background: linear-gradient(135deg, #da22ff, #9733ee);
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(218, 34, 255, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1000;
+}
+
+.btn-next:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(218, 34, 255, 0.6);
+    background: linear-gradient(135deg, #e44dff, #ac58ff);
 }

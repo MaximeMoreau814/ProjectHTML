@@ -175,6 +175,7 @@ app.get('/question', function(req, res) {
             for (var key in Rooms) {
                     if (Rooms[key].name == RoomCode) {
                         Rooms[key].question = Question;
+                        Rooms[key].votes = {};
                         res.send(Rooms[key]);
                         break;
                     }
@@ -221,6 +222,7 @@ app.get('/vote', function(req, res) {
         res.send("false");
     }
 });
+/*
 app.get('/question_suivante', function(req, res) { // faut utilser un fetch pour ça et un fetch pour la question et normalement on est good mais j'ai pas eu l'occas de tester
     let roomCode = req.query.r;
     for (let key in Rooms) {
@@ -231,6 +233,7 @@ app.get('/question_suivante', function(req, res) { // faut utilser un fetch pour
     }
     res.send("false");
 });
+*/
 
 //On  peut peut-être faire une route pour stop  la game genre ? jsp
 

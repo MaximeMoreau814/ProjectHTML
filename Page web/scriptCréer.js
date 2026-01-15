@@ -93,6 +93,16 @@ function updateInfo(){
                 li.className = "user";
                 listeuser.appendChild(li);
             });
+        }  
+        const questionElement = document.querySelector(".question");
+        if (questionElement && roomData.question && questionElement.textContent !== roomData.question) {
+            questionElement.textContent = roomData.question;
+            document.getElementById("Answer").innerHTML = "";
+            const container = document.getElementById("Answer");
+            container.style.alignItems = "center";
+            container.style.height = "auto";
+            container.style.display = "flex";
+            buttons();
         }
     });
     if (localStorage.getItem('start') === "true") {
@@ -189,6 +199,26 @@ function result() {
                 i++;
             }
         }
+        if (!document.getElementById("btn-next-round")) {
+        let nextBtn = document.createElement("button");
+        nextBtn.id = "btn-next-round"; 
+        nextBtn.className = "btn-next";     
+        nextBtn.textContent = "Question Suivante";
+        nextBtn.style.position = "absolute";
+        nextBtn.style.top = (top + 40) + "px";
+        nextBtn.style.left = "50%";
+        nextBtn.style.transform = "translateX(-50%)"; 
+        nextBtn.style.margin = "0";
+        nextBtn.onclick = function() {
+            let roomCode = localStorage.getItem('roomcode');
+            fetch('http://localhost:8080/question?r=' + roomCode)
+            .then(res => res.json())
+            .then(data => {
+                console.log("oui c'est bueno");
+            });
+        };
+        container.appendChild(nextBtn);
+    }
     });
 }
 
@@ -223,7 +253,7 @@ function main(){
     else{
         document.getElementById("bienvenue").style.fontSize="1em";
         let roomCode = localStorage.getItem('roomcode');
-        //remplacer le bloc indication par le bloc de question, J'affiche une question mais c'es pas la même pour tous
+        //remplacer le bloc indication par le bloc de question
         fetch('http://localhost:8080/part?room=' + roomCode)
             .then(res => res.json())
             .then(data => {
