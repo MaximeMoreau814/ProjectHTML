@@ -7,10 +7,21 @@ Site internet sur lequel se connectent des amis et répondent à des questions s
 
 Les participants peuvent créer et rejoindre des groupes privés. Chaque utilisateur renseigne un pseudonyme avant de créer ou rejoindre un groupe. Les groupes sont géré par un serveur qui vient stocker le code du groupe, la question en court, si la partie a commencé, les personnes présentes dans le groupe ainsi que les votes de chacun.
 
-Nous avons utilisé un serveur tournant via node.js, le reste des fonctionnalitées est assuré par du javascript.
+Nous avons utilisé un serveur tournant via node.js, le reste des fonctionnalitées est assuré par du javascript qui s'occupe à la fois du back-end et du front-end, niveau esthétique nous avons aussi de l'HTML-5 et du CSS-3.
+
+
+Bien que nous ayons tous travaillé à peu près toutes les parties du projet, nous pourrions dire que
+Rôles :
+ -  Clément GAUTRET                     : site principal
+ -  Maxime MOREAU                       : site principal
+ -  Bosco-Marie PICOT DE MORAS D'ALIGNY : CSS
+ -  Rémi REULIER                        : serveur
+
 
 lien : 
+https://youtu.be/Fh7A7Tr-n3o
+
 
 Un bug connu est lorsque la page subie trop de reload, l'utilisateur est supprimé du groupe. Ainsi, lorsque cela se produit, nous avons fait en sorte qu'il soit redirigé sur la page d'index. 
 
-Projet par : Clément GAUTRET, Maxime MOREAU, Rémi REULIER, Bosco-Marie D'ALIGNY
+Projet par : Clément GAUTRET, Maxime MOREAU, Rémi REULIER, Bosco-Marie PICOT DE MORAS D'ALIGNY

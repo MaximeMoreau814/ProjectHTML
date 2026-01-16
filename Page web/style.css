@@ -63,8 +63,13 @@ p {
     transform: translateY(-3px);
 }
 
-.btn-create { background: linear-gradient(135deg, #28a745 0%, #218838 100%); }
-.btn-join { background: linear-gradient(135deg, #007bff 0%, #0069d9 100%); }
+.btn-create {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+}
+
+.btn-join {
+    background: linear-gradient(135deg, #007bff 0%, #0069d9 100%);
+}
 
 footer {
     width: 100%;

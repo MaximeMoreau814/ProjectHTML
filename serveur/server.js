@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('fs'); //import de la bibliothèque fs
 var express = require('express'); //import de la bibliothèque Express
 var app = express(); //instanciation d'une application Express
 
@@ -6,7 +6,6 @@ let i = 1;
 let create_room = true;
 let create_user = true;
 let room_exist = false;
-
 let Rooms = {};
 
 app.use(express.json());
@@ -18,18 +17,19 @@ app.use(cors({
     origin: 'null'
 }));
 
+// [url]/add_usr?r=[roomCode]&user=[userName] ajoute l'utilisateur user dans la room r
 app.get('/add_usr', function(req, res) {
     create_user = true;
     if("r" in req.query && "user" in req.query) {
         for(var key in Rooms){
             if(Rooms[key].name == req.query.r){
-                // CHANGED: Check if user already exists in the users array
+                // Regarde si user est déjà dans Rooms
                 if(Rooms[key].users.includes(req.query.user)){
                     create_user = false;
                 }
                 
                 if(create_user){
-                    // CHANGED: Simply push the user to the users array
+                    // Push l'utilisateur à la fin de users
                     Rooms[key].users.push(req.query.user);
                     res.send(true);
                 }
@@ -39,29 +39,13 @@ app.get('/add_usr', function(req, res) {
             }
         }
     } else {
-        res.send("Pas de parametres");
+        throw(new Error("Pas de parametres"));
     }
 });
 
-app.get('/join', function(req, res) {
-    room_exist = false;
-    if("r" in req.query) {
-        for(var key in Rooms){
-            if(Rooms[key].name == req.query.r){
-                res.send(true);
-                room_exist = true;
-            }
-        }
-        if(!room_exist){
-            throw(new Error("room n'existe pas"));
-        }
-    } else {
-        res.send("Pas de parametres");
-    }
-})
-
+// [url]/create?r=[roomCode]&user=[userName] crée une room
 app.get('/create', function(req, res) {
-    create_room = true;
+    create_room = true; // la variable est a true si la room n'existe pas déjà
     if("r" in req.query && "user" in req.query) {
         for(var key in Rooms){
             if(Rooms[key].name == req.query.r){
@@ -86,9 +70,10 @@ app.get('/create', function(req, res) {
     }
 });
 
+// [url]/delete?r=[roomCode]&user=[userName] supprime l'utilisateur user de la room r
+// si plus d'utilisateur dans la room, supprime la room
 app.get('/delete', function(req, res) {
     let roomname;
-    let username;
     if("r" in req.query && "user" in req.query) {
         for(var key in Rooms){
             if(Rooms[key].name == req.query.r){
@@ -99,14 +84,14 @@ app.get('/delete', function(req, res) {
         if(roomname && Rooms[roomname].users){
             const userIndex = Rooms[roomname].users.indexOf(req.query.user);
             if(userIndex !== -1){
-                // Remove user from array
+                // supprime l'utilisateur de users
                 Rooms[roomname].users.splice(userIndex, 1);
 
                 if (Rooms[roomname].votes && Rooms[roomname].votes[req.query.user]) {
                     delete Rooms[roomname].votes[req.query.user];
                 }
                 
-                // Check if room should be deleted (only name, users array, and questions left)
+                // vérification de si la room doit être supprimée ou non ==> il n'y a plus d'utilisateurs
                 if(Rooms[roomname].users.length === 0){
                     delete Rooms[roomname];
                 }
@@ -118,6 +103,7 @@ app.get('/delete', function(req, res) {
     }
 });
 
+// [url]/isroomvalid?room=[roomCode] vérifie si la room existe
 app.get('/isroomvalid', function(req, res) {
     room_exist = false;
     if("room" in req.query){
@@ -137,6 +123,7 @@ app.get('/isroomvalid', function(req, res) {
     }
 });
 
+// [url]/part?room=[roomCode] retourne le contenu de l'objet traduisant la room
 app.get('/part', function(req, res) {
     room_exist = false;
     if("room" in req.query){
@@ -156,36 +143,45 @@ app.get('/part', function(req, res) {
     }
 });
 
+// [url]/json retourne tout le contenu du json
 app.get('/json', function(req, res) {
     res.json(Rooms);
 });
 
-app.get('/question', function(req, res) { 
-    let RoomCode = req.query.r;
-    fs.readFile('./serveur/Question.txt', 'utf-8', (err, data) => {
-        if(err){
-            res.status(500).send("Error reading questions file");
-            return;
-        }
-        let words = data.split("\n");
-        // Filter out empty lines
-        words = words.filter(word => word.trim().length > 0);
-        if(words.length > 0){
-            let Question = words[Math.floor(Math.random() * words.length)]; 
-            for (var key in Rooms) {
-                    if (Rooms[key].name == RoomCode) {
-                        Rooms[key].question = Question;
-                        Rooms[key].votes = {};
-                        res.send(Rooms[key]);
-                        break;
+// [url]/question?r=[roomCode] met une question aléatoire dans l'objet de la room
+app.get('/question', function(req, res) {
+    if("r" in req.query){
+        let RoomCode = req.query.r;
+        // on lit le fichier Question.txt
+        fs.readFile('./serveur/Question.txt', 'utf-8', (err, data) => {
+            if(err){
+                res.status(500).send("Error reading questions file");
+                return;
+            }
+            let words = data.split("\n"); // on divise les lignes
+            // on supprime les lignes vides
+            words = words.filter(word => word.trim().length > 0);
+            if(words.length > 0){
+                let Question = words[Math.floor(Math.random() * words.length)]; 
+                for (var key in Rooms) {
+                        if (Rooms[key].name == RoomCode) {
+                            Rooms[key].question = Question;
+                            Rooms[key].votes = {};
+                            res.send(Rooms[key]);
+                            break;
+                        }
                     }
-                }
-        } else {
-            res.send("No questions available");
-        }
-    });
+            } else {
+                res.send("No questions available");
+            }
+        });
+    }
+    else{
+        res.send(false);
+    }
 });
 
+// [url]/start_game?r=[roomCode] démarre le jeu chez tous les utilisateurs
 app.get('/start_game', function(req, res) {
     if("r" in req.query){
         let roomCode = req.query.r;
@@ -203,6 +199,7 @@ app.get('/start_game', function(req, res) {
     }
 });
 
+// [url]/vote?r=[roomCode]&from=[userName1]&to[userName2] le vote userName2 de userName1 dans l'objet vote de la room
 app.get('/vote', function(req, res) {
     if("r" in req.query && "from" in req.query && "to" in req.query){
         let roomCode = req.query.r;
@@ -222,7 +219,9 @@ app.get('/vote', function(req, res) {
         res.send("false");
     }
 });
+
 /*
+Clément Gautret le GOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAAAAAAAAAAAAAAAAAT
 app.get('/question_suivante', function(req, res) { // faut utilser un fetch pour ça et un fetch pour la question et normalement on est good mais j'ai pas eu l'occas de tester
     let roomCode = req.query.r;
     for (let key in Rooms) {

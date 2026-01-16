@@ -78,7 +78,10 @@ input#code {
     width: auto;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
-.btn-join:hover { transform: scale(1.05); }
+
+.btn-join:hover {
+    transform: scale(1.05);
+}
 
 .btn-back {
     background-color: transparent;
@@ -88,7 +91,11 @@ input#code {
     padding: 10px 30px;
     width: 200px;
 }
-.btn-back:hover { background-color: #555; color: white; }
+
+.btn-back:hover {
+    background-color: #555;
+    color: white;
+}
 
 .erreur {
     display: none; /* Caché par défaut via JS, mais CSS prêt */

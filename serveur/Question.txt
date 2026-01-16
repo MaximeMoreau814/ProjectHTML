@@ -1,39 +1,39 @@
 Qui est le meilleur cuistot ?
 Qui est le plus en retard  ?
-Qui est le plus succesptible de mourir empoisoné ?
+Qui est le plus susceptible de mourir empoisoné ?
 Qui est le plus sérieux quand il s'agit de travail ?
-Qui est le pourrait lancer son stand up ?
-Qui est le plus succesptible de finir en prsion ?
-Il y a une bombe à desamorcer, qui appelez vous ?
+Qui pourrait lancer son stand up ?
+Qui est le plus susceptible de finir en prsion ?
+Il y a une bombe à désamorcer, qui appelez vous ?
 Vous avez commis un meurtre, qui vous balance en premier ?
-Qui serait votre poulain pour un concour de culture Générale ?
-Qui enflamme le plus la piste de dance ?
-Qui est le plus succesptible de mourir en premier ?
+Qui serait votre poulain pour un concours de culture générale ?
+Qui enflamme le plus la piste de danse ?
+Qui est le plus susceptible de mourir en premier ?
 Qui deviendra le plus riche ?
 Qui deviendra le plus pauvre ?
-Qui est le plus succesptible d'apprendre une nouvelle langue uniquement pour draguer ?
+Qui est le plus susceptible d'apprendre une nouvelle langue uniquement pour draguer ?
 Qui est capable de se perdre le plus rapidement dans une nouvelle ville ?
 Qui survivrait le mieux sur une île déserte ?
-Qui est le plus succesptible de disparaitre du jour au lendemain et de revenir comme si de rien n'était ?
+Qui est le plus susceptible de disparaitre du jour au lendemain et de revenir comme si de rien n'était ?
 Vous avez un problème de maths complexe à résoudre, qui appelez vous à la rescousse ?
-Qui est le plus succesptible de lancer sa start up ?
+Qui est le plus susceptible de lancer sa start up ?
 Qui a le plus chance d'avoir des problèmes avec la mafia ?
-On fait une fête le soir. Qui est le plus déchainé ?
+On fait une fête le soir, qui est le plus déchainé ?
 Qui est le meilleur conducteur ?
-Vous vous faites poursuivre par les flic. Qui arrive à s'en tirer ?
-Qui se laisserai tempter par une experience dangeureuse ?
+Vous vous faites poursuivre par les flics, qui arrive à s'en tirer ?
+Qui se laisserai tenter par une expérience dangereuse ?
 Vous êtes en soirée, qui perdez vous en premier ?
 Qui a le plus de chance de rentrer acompagné quand il sort ?
 Avec qui échangeriez vous votre garde robe ?
-A confieriez vous un crime pour qu'il vous couvre ?
+A qui confieriez vous un crime pour qu'il vous couvre ?
 Qui aura un enfant en premier ?
 Qui se mariera en premier ?
-Qui a le plus de succes dans ses relations ? 
-Qui regarde le plus de serie ?
-Vous êtes tous en ensemble et vous trouvez un cadavre, qui est le plus suspect ?
-Qui pourrait partir du jour au lendemain pour aller vivre a l'etranger ?
+Qui a le plus de succès dans ses relations ? 
+Qui regarde le plus de série ?
+Vous êtes tous ensemble et vous trouvez un cadavre, qui est le plus suspect ?
+Qui pourrait partir du jour au lendemain pour aller vivre a l'étranger ?
 Qui vomit le plus à cause de l'alcool ?
-Qui a le plus de chance de finir une soiree completement ivre ?
+Qui a le plus de chance de finir une soirée complétement ivre ?
 Qui tient le mieux l'alcool ?
 Qui tient le moins bien l'alcool ?
 Qui d'après vous à testé le plus de drogue ?
@@ -41,25 +41,11 @@ Qui d'après vous bois le plus d'alcool ?
 Qui a le plus de chance de performer dans un nouveau sport ?
 Vous faites une course, qui arrive premier ?
 Vous faites une course, qui arrive dernier ?
-Vous devez sauvez un seul d'entre eux, qui choissez vous ?
+Vous devez sauvez un seul d'entre eux, qui chosissez vous ?
 Qui a le plus de chance de finir président ?
 Qui se lancerait en politique en premier ?
-Qui a une memoire de poisson rouge ?
+Qui a une mémoire de poisson rouge ?
 Qui achète le plus de chose inutiles ?
 Qui pourrait devenir chanteur ?
 Qui pourrait devenir danseur ?
-Qui a le plus de chance de rester celibatairee ?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Qui a le plus de chance de rester celibataire ?
